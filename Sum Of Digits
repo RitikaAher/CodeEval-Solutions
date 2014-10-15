@@ -1,0 +1,33 @@
+import java.io.*;
+
+
+public class SumDigits {
+	public static int sumDig(int num){
+		int sum = 0;
+		while(num!=0){
+			sum = sum+ num%10;
+			num = num/10;
+		}
+		return sum;
+	}
+	
+	public static void main(String args[]){
+			
+		try{
+			File file = new File("c:/file.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			
+			String line;
+			int sum=0;
+			while((line = reader.readLine())!=null){
+				int num = Integer.parseInt(line);
+				sum = sumDig(num);
+				System.out.println(sum);
+			}
+			
+		}catch(IOException e){
+			System.out.println("Error Reading File: " + e);
+		}
+	}
+
+}
