@@ -1,0 +1,16 @@
+import java.io.*;
+
+
+public class LowerCase {
+	public static void main(String args[]) throws IOException{
+		File file = new File("C:/file.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		
+		String line;
+		while((line = reader.readLine())!=null){
+			System.out.println(line.toLowerCase());
+			
+		}
+	}
+
+}
