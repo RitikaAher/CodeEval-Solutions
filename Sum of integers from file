@@ -1,0 +1,21 @@
+import java.io.*;
+
+
+public class SumNumbers {
+	public static void main(String args[]){
+		try{
+			File file = new File("C:/file.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			int sum = 0;
+			while((line = reader.readLine())!= null){
+				int num = Integer.parseInt(line);
+				sum = sum+num;
+			}
+			System.out.println(sum);
+		}catch(IOException e){
+			System.out.println("Error Reading File: "+ e);
+		}
+	}
+
+}
