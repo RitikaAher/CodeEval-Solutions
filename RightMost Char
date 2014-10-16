@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+public class RightChar {
+	public static void main(String[] args){
+		try{
+			File file = new File("C:/file.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+
+			while((line = reader.readLine())!=null){
+
+				String[] arr = line.split(",");
+
+				int num = arr[0].lastIndexOf(arr[1]);
+				System.out.println(num);
+
+
+
+			}
+
+
+
+		}catch(IOException e){
+			System.out.println("Error Reading File: "+ e);
+		}
+	}
+
+}
