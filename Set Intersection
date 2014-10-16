@@ -1,0 +1,64 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+public class SetIntersection {
+
+	public static void checkIntersection(int[] arr1, int[] arr2){
+		int i = 0, j = 0;
+		StringBuilder buff = new StringBuilder();
+		String separator = "";
+		while(i<arr1.length&& j<arr2.length){
+			if(arr1[i]<arr2[j]){
+				i++;
+			}else if(arr1[i]>arr2[j]){
+				j++;
+			}else if(arr1[i]==arr2[j]){
+				buff.append(separator);
+				buff.append(arr1[i]);
+				separator = ",";
+				i++;
+				j++;
+			}
+
+		}
+		System.out.print(buff);
+	}
+	public static void main(String args[]){
+		try{
+			File file = new File("C:/file.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			
+			while((line = reader.readLine())!=null){
+				String[] arr = line.split(";");
+				String[] num1 = arr[0].split(",");
+				String[] num2 = arr[1].split(",");
+				int[] arr1  = new int[num1.length];
+				int[] arr2  = new int[num2.length];
+
+				for(int i = 0; i< num1.length;i++){
+					arr1[i] = Integer.parseInt(num1[i]);
+
+
+				}
+
+				for(int i = 0; i< num2.length;i++){
+					arr2[i] = Integer.parseInt(num2[i]);
+
+				}
+
+				checkIntersection(arr1,arr2);
+				System.out.println();
+
+			}
+
+
+
+		}catch(IOException e){
+			System.out.println("Error Reading File: "+ e);
+		}
+	}
+}
