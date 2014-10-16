@@ -1,0 +1,27 @@
+import java.io.*;
+
+
+public class NmodM {
+	
+	public static void main(String args[]){
+		try{
+			File file = new File("C:/file.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			int num = 0;
+			while((line = reader.readLine())!=null){
+				String[] arr = line.split(",");
+				int N = Integer.parseInt(arr[0]);
+				int M = Integer.parseInt(arr[1]);
+				num = N%M;
+				System.out.println(num);
+				
+			}
+			
+			
+		}catch(IOException e){
+			System.out.println("Error Reading File: "+ e);
+		}
+	}
+
+}
