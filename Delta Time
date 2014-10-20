@@ -1,0 +1,57 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+public class DeltaTime {
+	static SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+	public static void calculateDiff(String arr, String arr1) throws ParseException{
+
+		Date date1 = format.parse(arr);
+		Date date2 = format.parse(arr1);
+
+		long diff = Math.abs(date2.getTime() - date1.getTime());
+
+
+		long diffSeconds = diff / 1000 % 60;
+		long diffMinutes = diff / (60 * 1000) % 60;
+		long diffHours = diff / (60 * 60 * 1000) % 24;
+
+
+		System.out.printf("%02d:%02d:%02d", diffHours,diffMinutes,diffSeconds );
+		System.out.println();
+
+
+
+
+
+	}
+	public static void main(String args[]) throws Exception{
+		try{
+			File file = new File("C:/file.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+
+
+			while((line = reader.readLine())!=null){
+				String[] arr = line.split("\\s");
+
+
+
+				for(int i = 0;i<arr.length;i+=2){
+
+					calculateDiff(arr[i],arr[i+1]);
+				}
+			}
+
+
+
+		}catch(IOException e){
+			System.out.println("Error Reading File: "+ e);
+		}
+	}
+}
