@@ -1,0 +1,60 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+public class RacingChars {
+	public static void main(String args[]) throws Exception{
+		try{
+			File file = new File("C:/file.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			int prev = -1, curr = -1;
+			String ch ;
+
+
+			while((line = reader.readLine())!=null){
+				String[] arr1 = line.split("\\n");
+				if(arr1[0].contains("C")){
+					ch = "C";
+				}else
+					ch = "_";
+				curr = arr1[0].indexOf(ch);
+
+				if((ch== "C"|| ch == "_")&& prev == -1){
+					prev = arr1[0].indexOf(ch);
+
+					arr1[0] = arr1[0].replace(ch,"|");
+				}else{
+					if(prev<curr){
+						prev = arr1[0].indexOf(ch);
+
+						arr1[0] =arr1[0].replace(ch, "\\");
+
+					}else if (prev == curr){
+						arr1[0]=arr1[0].replace(ch, "|");
+					}else{
+						prev = arr1[0].indexOf(ch);
+						arr1[0]=arr1[0].replace(ch, "/");
+
+
+
+
+					}
+
+
+				}
+				System.out.print(arr1[0]);
+
+
+				System.out.println();
+			}
+
+
+
+		}catch(IOException e){
+			System.out.println("Error Reading File: "+ e);
+		}
+	}
+}
