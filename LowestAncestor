@@ -1,0 +1,133 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+
+public class LowestAncestor {
+	public static void main(String args[]){
+		CreateTree la= new CreateTree();
+
+		la.insert(30);
+		la.insert(8);
+		la.insert(52);
+		la.insert(3);
+		la.insert(20);
+		la.insert(10);
+		la.insert(29);
+
+		try{
+			File file = new File("C:/file.txt");
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+
+			while((line = reader.readLine())!=null){
+				String[] arr = line.split(" ");
+
+				int num1 = Integer.parseInt(arr[0]);
+				int num2 = Integer.parseInt(arr[1]);
+				la.search(num1, num2);
+
+
+
+
+
+			}
+
+
+
+		}catch(IOException e){
+			System.out.println("Error Reading File: "+ e);
+		}
+	}
+
+	private static class CreateTree{
+		private static class BSTNode{
+			int key;
+			BSTNode left,right,parent;
+
+			public BSTNode(int key){
+				this.key = key;
+				this.left = null;
+				this.right = null;
+				this.parent = null;
+			}
+
+		}
+		BSTNode root = null;
+
+		public void insert(int key){
+
+			root = insert(root,key);
+
+		}
+		public void search(int key1,int key2){
+			BSTNode retNode = searchNode(root,key1);
+			BSTNode retNode1 = searchNode(root,key2);
+			int retParent = checkAncestor(retNode,retNode1);
+			System.out.println(retParent);
+		}
+		public int checkAncestor(BSTNode node1, BSTNode node2){
+			BSTNode parent = null;
+			while(node1.parent!=null && node2.parent!=null){
+				if(node1.parent.key == node2.parent.key){
+					parent = node1.parent;
+
+					break;
+				}
+				if(node1.parent.key > node2.parent.key){
+					parent = node1.parent;
+					node1 = node1.parent;
+				}
+
+
+				else{
+					parent = node2.parent;
+					node2 = node2.parent;
+				}
+
+
+			}
+			return parent.key;
+		}
+
+		public BSTNode insert(BSTNode currNode, int key){
+
+			if(currNode == null){
+				return new BSTNode(key);
+
+			}else{
+				if(key<=currNode.key){
+					//node = currNode;
+					currNode.left = insert(currNode.left,key);
+					currNode.left.parent = currNode;
+
+				}else{
+					//	node = currNode;
+					currNode.right = insert(currNode.right,key);
+					currNode.right.parent = currNode;
+
+				}
+			}
+
+
+			return currNode;
+
+
+		}
+		public BSTNode searchNode(BSTNode node, int key){
+			while(node!=null && key!= node.key){
+				if(key<node.key)
+					node = node.left;
+				else
+					node = node.right;
+			}
+
+			return node;
+
+		}
+	}
+
+
+}
