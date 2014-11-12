@@ -1,0 +1,30 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+public class ReadMore {
+	public static void main(String[] args) throws IOException
+	{
+		File file = new File("C:/file.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+
+
+		while((line = reader.readLine())!=null){
+			if(line.length()<=55)
+				System.out.println(line);
+			else{
+
+				line = line.substring(0, 40);
+				if(!line.contains(" ")){
+					System.out.println(line+ "... <Read More>");
+				}else
+				System.out.println(line.substring(0, line.lastIndexOf(" "))+ "... <Read More>");
+
+
+			}
+		}
+	}
+}
