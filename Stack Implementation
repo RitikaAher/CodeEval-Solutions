@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+import java.util.Stack;
+
+
+public class StackImplementation {
+	public static void printStack(Stack<String> s1){
+		while(s1.size()>0){
+			System.out.print(s1.pop()+" ");
+			if(s1.size()>0)
+				s1.pop();
+
+		}
+
+	}
+	public static void main(String[] args) throws IOException
+	{
+		File file = new File("C:/file.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+
+		while((line = reader.readLine())!=null){
+			Stack<String> s1 = new Stack<String>();
+			String[] arr = line.split("\\s");
+			for(int i =0;i<arr.length;i++){
+				s1.push(arr[i]);
+
+			}
+
+			printStack(s1);
+			System.out.println();
+
+		}
+
+
+	}
+}
