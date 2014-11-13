@@ -1,0 +1,40 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+public class DecimalToBinary {
+	public static void main(String[] args) throws IOException
+	{
+		File file = new File("C:/file.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+
+		while((line = reader.readLine())!=null){
+
+			int[] binary = new int[50];
+			int count = 0;
+			int oneCount = 0;
+			int i = 0;
+			int num = Integer.parseInt(line);
+			while(num> 0){
+				binary[i] = num%2;
+				num=num/2;
+				count++;
+				i++;
+			}
+			for(int j = count-1;j>=0;j--){
+				if(binary[j]== 1)
+					oneCount++;
+			}
+
+			System.out.println(oneCount);
+
+
+		}
+
+
+
+	}
+}
