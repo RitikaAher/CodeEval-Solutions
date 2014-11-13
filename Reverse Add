@@ -1,0 +1,57 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+
+public class ReverseAdd {
+	public static long findReverse(long num){
+		long reverse = 0;
+		while(num>0){
+			reverse = (reverse*10)+num%10;
+			num = num/10;
+		}
+		return reverse;
+	}
+	public static boolean checkPalindrome(long num){
+		long rev = findReverse(num);
+		if(rev == num){
+			return true;
+		}else
+			return false;
+	}
+	public static long sum(long num1, long num2){
+		long sum = num1+num2;
+		return sum;
+	}
+	public static void main(String[] args) throws IOException
+	{
+		File file = new File("C:/file.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+
+		while((line = reader.readLine())!=null){
+			long num = Integer.parseInt(line);
+			long sum = 0;
+			int count = 0;
+
+			boolean palindrome = false; 
+
+			while(!palindrome){
+				count++;
+				long revNum = findReverse(num);
+				sum = sum(num,revNum);
+				palindrome = checkPalindrome(sum);
+				num = sum;
+			}
+			System.out.print(count+ " "+ sum);
+			System.out.println();
+
+
+		}
+
+
+
+	}
+}
