@@ -1,0 +1,75 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
+
+public class NumberPairs {
+	public static int[] convertToInt(String[] arr){
+		int[] numArr = new int[arr.length];
+		for(int i = 0;i<arr.length;i++)
+			numArr[i]=Integer.parseInt(arr[i]);
+		return numArr;
+	}
+	public static ArrayList<Integer> findPairs(int[] numArr, int sum){
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for(int i = 0;i<numArr.length;i++){
+			for(int j = i+1;j<numArr.length;j++){
+				if(numArr[j]>sum){
+					break;
+				}else{
+					if(numArr[i]+numArr[j]== sum){
+						list.add(numArr[i]);
+						list.add(numArr[j]);
+
+					}
+				}
+			}
+		}
+		return list;
+	}
+	public static void printList(ArrayList<Integer> list){
+		StringBuilder buff = new StringBuilder();
+		String separator = "";
+		for(int i = 0;i<list.size();i++){
+			if(i!=0 && i%2 == 0){
+				buff.append(";");
+				buff.append(list.get(i));
+
+			}else{
+				buff.append(separator);
+				buff.append(list.get(i));
+				separator = ",";
+			}
+
+
+		}
+		System.out.print(buff);
+	}
+	public static void main(String[] args) throws IOException
+	{
+		File file = new File("C:/file.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+
+		while((line = reader.readLine())!=null){
+			ArrayList<Integer> list = null;
+			int[] numArr ;
+			String[] arr = line.split(";");
+
+			int sum = Integer.parseInt(arr[1]);
+			String[] listArr = arr[0].split(",");
+			numArr = convertToInt(listArr);
+			list = findPairs(numArr,sum);
+
+			if(list.size() == 0)
+				System.out.println("NULL");
+			printList(list);
+			System.out.println();
+		}
+
+
+
+	}
+}
