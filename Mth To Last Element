@@ -1,0 +1,37 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+
+
+public class MthToLastElement {
+	public static void main(String[] args) throws IOException
+	{
+		File file = new File("C:/file.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+
+
+
+		while((line = reader.readLine())!=null){
+			int j = 0;
+			String[] arr = line.split("\\s");
+			String[] revArr = new String[arr.length-1];
+			int pos = Integer.parseInt(arr[arr.length-1]);
+
+			for(int i = arr.length -2; i>-1;i--){
+				revArr[j] = arr[i];
+				j++;
+			}
+      if(revArr.length>pos-1)
+  			System.out.println(revArr[pos-1]);
+
+
+
+
+		}
+
+
+	}
+}
