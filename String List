@@ -1,0 +1,58 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+public class StringPermutations {
+	public static ArrayList<String> stringPermute(String startStr,String endStr,ArrayList<String> list,int input){
+
+
+
+
+		if(startStr.length()==input){
+
+			if (list.indexOf(startStr) == -1)
+
+				list.add(startStr);
+		}
+
+		else{
+
+			for(int i =0;i<endStr.length();i++){
+				String newStr = startStr + endStr.substring(i, i + 1);
+				stringPermute(newStr, endStr, list, input);
+			}
+		}
+		return list;
+	}
+
+	public static void main(String args[]) throws IOException {
+		File file = new File("C:/file.txt");
+		BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+
+		while((line = reader.readLine())!=null){
+			String[] arrStr = line.split(",");
+			
+			ArrayList<String> list = new ArrayList<String>();
+			list = (stringPermute("", arrStr[1],list,Integer.parseInt(arrStr[0])));
+			Object[] arr = new String[list.size()];
+			arr = list.toArray();
+			Arrays.sort(arr);
+			StringBuilder buff = new StringBuilder();
+			String separator = "";
+			for(int i = 0;i<arr.length;i++){
+				buff.append(separator);
+				buff.append(arr[i]);
+				separator = ",";
+
+			}
+			System.out.println(buff);
+		}
+	}
+
+}
